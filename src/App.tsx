@@ -75,6 +75,12 @@ function App() {
     localStorage.setItem("wedding-tasks", JSON.stringify(updatedTasks));
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("wedding-auth");
+    setIsAuthenticated(false);
+    setPassword("");
+  };
+
   if (!isAuthenticated) {
     return (
       <div style={{
@@ -205,7 +211,7 @@ function App() {
       padding: '2rem 1rem'
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
+        <div style={{ marginBottom: '2rem', textAlign: 'center', position: 'relative' }}>
           <h1 style={{ 
             fontSize: '2.5rem', 
             fontWeight: '700', 
@@ -214,6 +220,24 @@ function App() {
             textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
           }}>💒 結婚式準備管理サイト</h1>
           <p style={{ color: '#666', fontSize: '1.125rem' }}>2026年3月28日（土）挙式・披露宴</p>
+          <button
+            onClick={handleLogout}
+            style={{
+              position: 'absolute',
+              top: '0',
+              right: '0',
+              padding: '0.5rem 1rem',
+              background: 'white',
+              color: '#c2185b',
+              border: '2px solid #c2185b',
+              borderRadius: '8px',
+              fontSize: '0.875rem',
+              cursor: 'pointer',
+              fontWeight: '600'
+            }}
+          >
+            ログアウト
+          </button>
         </div>
 
         <div style={{
