@@ -36,7 +36,7 @@ const INITIAL_TASKS: Task[] = [
   { id: "19", title: "招待状のドラフト確認してもらう、リストもほぼ確定してると良い", category: "deadline", deadline: "11月中", completed: false },
 ];
 
-const PASSWORD = "wedding2026";
+const PASSWORD = "0328";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
