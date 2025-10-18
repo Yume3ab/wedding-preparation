@@ -82,7 +82,7 @@ function App() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(to bottom right, #fce4ec, #f3e5f5)',
+        background: 'linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%)',
         padding: '1rem'
       }}>
         <div style={{
@@ -90,13 +90,13 @@ function App() {
           maxWidth: '400px',
           padding: '2rem',
           background: 'white',
-          borderRadius: '8px',
-          boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
+          borderRadius: '12px',
+          boxShadow: '0 10px 25px rgba(0,0,0,0.1)'
         }}>
-          <h2 style={{ fontSize: 'clamp(1.25rem, 5vw, 1.5rem)', fontWeight: 'bold', marginBottom: '0.5rem' }}>結婚式準備管理</h2>
-          <p style={{ color: '#666', marginBottom: '1.5rem', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>パスワードを入力してください</p>
+          <h2 style={{ fontSize: '1.75rem', fontWeight: '700', marginBottom: '0.5rem', color: '#c2185b' }}>💒 結婚式準備管理</h2>
+          <p style={{ color: '#666', marginBottom: '1.5rem' }}>パスワードを入力してください</p>
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>パスワード</label>
+            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '600', color: '#333' }}>パスワード</label>
             <input
               type="password"
               value={password}
@@ -106,10 +106,11 @@ function App() {
               style={{
                 width: '100%',
                 padding: '0.75rem',
-                border: '1px solid #ddd',
-                borderRadius: '4px',
-                fontSize: 'clamp(0.875rem, 3vw, 1rem)',
-                boxSizing: 'border-box'
+                border: '2px solid #e0e0e0',
+                borderRadius: '8px',
+                fontSize: '1rem',
+                boxSizing: 'border-box',
+                transition: 'border-color 0.3s'
               }}
             />
           </div>
@@ -117,15 +118,19 @@ function App() {
             onClick={handleLogin}
             style={{
               width: '100%',
-              padding: '0.75rem',
-              background: '#2563eb',
+              padding: '0.875rem',
+              background: 'linear-gradient(135deg, #ec407a 0%, #c2185b 100%)',
               color: 'white',
               border: 'none',
-              borderRadius: '4px',
-              fontSize: 'clamp(0.875rem, 3vw, 1rem)',
+              borderRadius: '8px',
+              fontSize: '1rem',
               cursor: 'pointer',
-              fontWeight: '500'
+              fontWeight: '600',
+              boxShadow: '0 4px 12px rgba(194, 24, 91, 0.3)',
+              transition: 'transform 0.2s'
             }}
+            onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
+            onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
           >
             ログイン
           </button>
@@ -139,41 +144,54 @@ function App() {
   const deadlineTasks = tasks.filter(t => t.category === "deadline");
 
   const renderTasks = (taskList: Task[]) => (
-    <div style={{ marginTop: '1rem' }}>
+    <div style={{ marginTop: '1.5rem' }}>
       {taskList.map(task => (
         <div key={task.id} style={{
           display: 'flex',
           alignItems: 'flex-start',
-          padding: 'clamp(0.5rem, 2vw, 0.75rem)',
+          padding: '1rem',
           borderRadius: '8px',
-          marginBottom: '0.5rem',
-          background: '#f9fafb',
-          cursor: 'pointer'
-        }} onClick={() => toggleTask(task.id)}>
+          marginBottom: '0.75rem',
+          background: task.completed ? '#f5f5f5' : 'white',
+          border: '1px solid #e0e0e0',
+          cursor: 'pointer',
+          transition: 'all 0.2s'
+        }} 
+        onClick={() => toggleTask(task.id)}
+        onMouseOver={(e) => e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)'}
+        onMouseOut={(e) => e.currentTarget.style.boxShadow = 'none'}
+        >
           <input
             type="checkbox"
             checked={task.completed}
             onChange={() => toggleTask(task.id)}
             style={{ 
-              marginRight: 'clamp(0.5rem, 2vw, 0.75rem)', 
+              marginRight: '1rem', 
               marginTop: '0.25rem', 
               cursor: 'pointer',
-              minWidth: '16px',
-              minHeight: '16px'
+              width: '18px',
+              height: '18px',
+              accentColor: '#c2185b'
             }}
           />
           <div style={{ flex: 1 }}>
             <p style={{
               textDecoration: task.completed ? 'line-through' : 'none',
-              color: task.completed ? '#9ca3af' : '#000',
-              fontSize: 'clamp(0.875rem, 3vw, 1rem)',
-              lineHeight: '1.5'
+              color: task.completed ? '#9e9e9e' : '#212121',
+              fontSize: '1rem',
+              lineHeight: '1.6',
+              fontWeight: task.completed ? '400' : '500'
             }}>{task.title}</p>
             <p style={{ 
-              fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)', 
-              color: '#6b7280', 
-              marginTop: '0.25rem' 
-            }}>{task.deadline}</p>
+              fontSize: '0.875rem', 
+              color: '#757575', 
+              marginTop: '0.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.25rem'
+            }}>
+              <span>📅</span> {task.deadline}
+            </p>
           </div>
         </div>
       ))}
@@ -183,93 +201,101 @@ function App() {
   return (
     <div style={{
       minHeight: '100vh',
-      background: 'linear-gradient(to bottom right, #fce4ec, #f3e5f5)',
-      padding: 'clamp(0.5rem, 3vw, 1rem)'
+      background: 'linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%)',
+      padding: '2rem 1rem'
     }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
-        <div style={{ marginBottom: 'clamp(1rem, 4vw, 2rem)' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
           <h1 style={{ 
-            fontSize: 'clamp(1.5rem, 6vw, 2.5rem)', 
-            fontWeight: 'bold', 
+            fontSize: '2.5rem', 
+            fontWeight: '700', 
             marginBottom: '0.5rem',
-            lineHeight: '1.2'
-          }}>結婚式準備管理</h1>
-          <p style={{ color: '#666', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>2026年3月28日 挙式・披露宴</p>
+            color: '#c2185b',
+            textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
+          }}>💒 結婚式準備管理サイト</h1>
+          <p style={{ color: '#666', fontSize: '1.125rem' }}>2026年3月28日（土）挙式・披露宴</p>
         </div>
 
         <div style={{
           background: 'white',
-          borderRadius: '8px',
-          padding: 'clamp(1rem, 3vw, 1.5rem)',
-          marginBottom: 'clamp(1rem, 3vw, 1.5rem)',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+          borderRadius: '12px',
+          padding: '2rem',
+          marginBottom: '2rem',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
         }}>
           <h2 style={{ 
-            fontSize: 'clamp(1rem, 4vw, 1.25rem)', 
-            fontWeight: 'bold', 
-            marginBottom: '1rem' 
-          }}>基本情報</h2>
+            fontSize: '1.5rem', 
+            fontWeight: '700', 
+            marginBottom: '1.5rem',
+            color: '#c2185b',
+            borderBottom: '3px solid #f8bbd0',
+            paddingBottom: '0.5rem'
+          }}>📋 基本情報</h2>
           <div style={{ 
             display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', 
-            gap: 'clamp(0.75rem, 2vw, 1rem)' 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
+            gap: '1.5rem' 
           }}>
-            <div>
-              <p style={{ fontWeight: '600', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>挙式日時</p>
-              <p style={{ fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)' }}>2026年3月28日（土）13:30〜</p>
+            <div style={{ padding: '1rem', background: '#fce4ec', borderRadius: '8px' }}>
+              <p style={{ fontWeight: '700', color: '#c2185b', marginBottom: '0.5rem' }}>🕐 挙式日時</p>
+              <p style={{ color: '#424242' }}>2026年3月28日（土）13:30〜</p>
             </div>
-            <div>
-              <p style={{ fontWeight: '600', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>披露宴</p>
-              <p style={{ fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)' }}>15:00〜17:00</p>
+            <div style={{ padding: '1rem', background: '#f3e5f5', borderRadius: '8px' }}>
+              <p style={{ fontWeight: '700', color: '#8e24aa', marginBottom: '0.5rem' }}>🍽️ 披露宴</p>
+              <p style={{ color: '#424242' }}>15:00〜17:00</p>
             </div>
-            <div>
-              <p style={{ fontWeight: '600', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>会場</p>
-              <p style={{ fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)' }}>3F チャペル / 4F 宴会場</p>
+            <div style={{ padding: '1rem', background: '#e1f5fe', borderRadius: '8px' }}>
+              <p style={{ fontWeight: '700', color: '#0277bd', marginBottom: '0.5rem' }}>🏛️ 会場</p>
+              <p style={{ color: '#424242' }}>3F チャペル / 4F 宴会場</p>
             </div>
-            <div>
-              <p style={{ fontWeight: '600', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>次回打ち合わせ</p>
-              <p style={{ fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)' }}>2nd Meeting（日程未定）</p>
+            <div style={{ padding: '1rem', background: '#fff3e0', borderRadius: '8px' }}>
+              <p style={{ fontWeight: '700', color: '#e65100', marginBottom: '0.5rem' }}>📅 次回打ち合わせ</p>
+              <p style={{ color: '#424242' }}>2nd Meeting（日程未定）</p>
             </div>
           </div>
         </div>
 
         <div style={{
           background: 'white',
-          borderRadius: '8px',
-          padding: 'clamp(1rem, 3vw, 1.5rem)',
-          boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
+          borderRadius: '12px',
+          padding: '2rem',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
         }}>
           <h2 style={{ 
-            fontSize: 'clamp(1rem, 4vw, 1.25rem)', 
-            fontWeight: 'bold', 
-            marginBottom: '0.5rem' 
-          }}>ToDoリスト</h2>
+            fontSize: '1.5rem', 
+            fontWeight: '700', 
+            marginBottom: '0.5rem',
+            color: '#c2185b',
+            borderBottom: '3px solid #f8bbd0',
+            paddingBottom: '0.5rem'
+          }}>✅ ToDoリスト</h2>
           <p style={{ 
             color: '#666', 
-            marginBottom: '1rem',
-            fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)'
+            marginBottom: '1.5rem',
+            fontSize: '1rem',
+            marginTop: '1rem'
           }}>
-            完了: {tasks.filter(t => t.completed).length} / {tasks.length}
+            完了: <strong style={{ color: '#c2185b', fontSize: '1.25rem' }}>{tasks.filter(t => t.completed).length}</strong> / {tasks.length}
           </p>
 
           <div style={{ 
-            borderBottom: '1px solid #e5e7eb', 
-            marginBottom: '1rem', 
-            overflowX: 'auto',
-            WebkitOverflowScrolling: 'touch'
+            borderBottom: '2px solid #f0f0f0', 
+            marginBottom: '1rem'
           }}>
-            <div style={{ display: 'flex', gap: '0.25rem', minWidth: 'max-content' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
               <button
                 onClick={() => setActiveTab("next")}
                 style={{
-                  padding: 'clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1rem)',
-                  background: activeTab === "next" ? 'white' : 'transparent',
+                  padding: '0.75rem 1.5rem',
+                  background: activeTab === "next" ? 'linear-gradient(135deg, #ec407a 0%, #c2185b 100%)' : 'transparent',
+                  color: activeTab === "next" ? 'white' : '#666',
                   border: 'none',
-                  borderBottom: activeTab === "next" ? '2px solid #2563eb' : '2px solid transparent',
+                  borderBottom: activeTab === "next" ? 'none' : '2px solid transparent',
                   cursor: 'pointer',
-                  fontWeight: activeTab === "next" ? '600' : '400',
-                  fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)',
-                  whiteSpace: 'nowrap'
+                  fontWeight: activeTab === "next" ? '700' : '500',
+                  fontSize: '1rem',
+                  borderRadius: activeTab === "next" ? '8px 8px 0 0' : '0',
+                  transition: 'all 0.3s'
                 }}
               >
                 次回まで ({nextTasks.filter(t => !t.completed).length})
@@ -277,14 +303,16 @@ function App() {
               <button
                 onClick={() => setActiveTab("third")}
                 style={{
-                  padding: 'clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1rem)',
-                  background: activeTab === "third" ? 'white' : 'transparent',
+                  padding: '0.75rem 1.5rem',
+                  background: activeTab === "third" ? 'linear-gradient(135deg, #ab47bc 0%, #8e24aa 100%)' : 'transparent',
+                  color: activeTab === "third" ? 'white' : '#666',
                   border: 'none',
-                  borderBottom: activeTab === "third" ? '2px solid #2563eb' : '2px solid transparent',
+                  borderBottom: activeTab === "third" ? 'none' : '2px solid transparent',
                   cursor: 'pointer',
-                  fontWeight: activeTab === "third" ? '600' : '400',
-                  fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)',
-                  whiteSpace: 'nowrap'
+                  fontWeight: activeTab === "third" ? '700' : '500',
+                  fontSize: '1rem',
+                  borderRadius: activeTab === "third" ? '8px 8px 0 0' : '0',
+                  transition: 'all 0.3s'
                 }}
               >
                 3rdまで ({thirdTasks.filter(t => !t.completed).length})
@@ -292,14 +320,16 @@ function App() {
               <button
                 onClick={() => setActiveTab("deadline")}
                 style={{
-                  padding: 'clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1rem)',
-                  background: activeTab === "deadline" ? 'white' : 'transparent',
+                  padding: '0.75rem 1.5rem',
+                  background: activeTab === "deadline" ? 'linear-gradient(135deg, #ff9800 0%, #e65100 100%)' : 'transparent',
+                  color: activeTab === "deadline" ? 'white' : '#666',
                   border: 'none',
-                  borderBottom: activeTab === "deadline" ? '2px solid #2563eb' : '2px solid transparent',
+                  borderBottom: activeTab === "deadline" ? 'none' : '2px solid transparent',
                   cursor: 'pointer',
-                  fontWeight: activeTab === "deadline" ? '600' : '400',
-                  fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)',
-                  whiteSpace: 'nowrap'
+                  fontWeight: activeTab === "deadline" ? '700' : '500',
+                  fontSize: '1rem',
+                  borderRadius: activeTab === "deadline" ? '8px 8px 0 0' : '0',
+                  transition: 'all 0.3s'
                 }}
               >
                 期限付き ({deadlineTasks.filter(t => !t.completed).length})
