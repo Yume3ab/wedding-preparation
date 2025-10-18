@@ -170,9 +170,9 @@ function App() {
     <div style={{
       minHeight: '100vh',
       background: 'linear-gradient(to bottom right, #fce4ec, #f3e5f5)',
-      padding: '2rem 1rem'
+      padding: '1rem'
     }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
         <div style={{ marginBottom: '2rem' }}>
           <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>結婚式準備管理</h1>
           <p style={{ color: '#666' }}>2026年3月28日 挙式・披露宴</p>
@@ -186,7 +186,7 @@ function App() {
           boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
         }}>
           <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem' }}>基本情報</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem' }}>
             <div>
               <p style={{ fontWeight: '600' }}>挙式日時</p>
               <p>2026年3月28日（土）13:30〜</p>
@@ -217,8 +217,8 @@ function App() {
             完了: {tasks.filter(t => t.completed).length} / {tasks.length}
           </p>
 
-          <div style={{ borderBottom: '1px solid #e5e7eb', marginBottom: '1rem' }}>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <div style={{ borderBottom: '1px solid #e5e7eb', marginBottom: '1rem', overflowX: 'auto' }}>
+            <div style={{ display: 'flex', gap: '0.5rem', minWidth: 'max-content' }}>
               <button
                 onClick={() => setActiveTab("next")}
                 style={{
