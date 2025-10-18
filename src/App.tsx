@@ -82,7 +82,8 @@ function App() {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: 'linear-gradient(to bottom right, #fce4ec, #f3e5f5)'
+        background: 'linear-gradient(to bottom right, #fce4ec, #f3e5f5)',
+        padding: '1rem'
       }}>
         <div style={{
           width: '100%',
@@ -92,10 +93,10 @@ function App() {
           borderRadius: '8px',
           boxShadow: '0 4px 6px rgba(0,0,0,0.1)'
         }}>
-          <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>結婚式準備管理</h2>
-          <p style={{ color: '#666', marginBottom: '1.5rem' }}>パスワードを入力してください</p>
+          <h2 style={{ fontSize: 'clamp(1.25rem, 5vw, 1.5rem)', fontWeight: 'bold', marginBottom: '0.5rem' }}>結婚式準備管理</h2>
+          <p style={{ color: '#666', marginBottom: '1.5rem', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>パスワードを入力してください</p>
           <div style={{ marginBottom: '1rem' }}>
-            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500' }}>パスワード</label>
+            <label style={{ display: 'block', marginBottom: '0.5rem', fontWeight: '500', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>パスワード</label>
             <input
               type="password"
               value={password}
@@ -104,10 +105,11 @@ function App() {
               placeholder="パスワードを入力"
               style={{
                 width: '100%',
-                padding: '0.5rem',
+                padding: '0.75rem',
                 border: '1px solid #ddd',
                 borderRadius: '4px',
-                fontSize: '1rem'
+                fontSize: 'clamp(0.875rem, 3vw, 1rem)',
+                boxSizing: 'border-box'
               }}
             />
           </div>
@@ -120,7 +122,7 @@ function App() {
               color: 'white',
               border: 'none',
               borderRadius: '4px',
-              fontSize: '1rem',
+              fontSize: 'clamp(0.875rem, 3vw, 1rem)',
               cursor: 'pointer',
               fontWeight: '500'
             }}
@@ -142,7 +144,7 @@ function App() {
         <div key={task.id} style={{
           display: 'flex',
           alignItems: 'flex-start',
-          padding: '0.75rem',
+          padding: 'clamp(0.5rem, 2vw, 0.75rem)',
           borderRadius: '8px',
           marginBottom: '0.5rem',
           background: '#f9fafb',
@@ -152,14 +154,26 @@ function App() {
             type="checkbox"
             checked={task.completed}
             onChange={() => toggleTask(task.id)}
-            style={{ marginRight: '0.75rem', marginTop: '0.25rem', cursor: 'pointer' }}
+            style={{ 
+              marginRight: 'clamp(0.5rem, 2vw, 0.75rem)', 
+              marginTop: '0.25rem', 
+              cursor: 'pointer',
+              minWidth: '16px',
+              minHeight: '16px'
+            }}
           />
           <div style={{ flex: 1 }}>
             <p style={{
               textDecoration: task.completed ? 'line-through' : 'none',
-              color: task.completed ? '#9ca3af' : '#000'
+              color: task.completed ? '#9ca3af' : '#000',
+              fontSize: 'clamp(0.875rem, 3vw, 1rem)',
+              lineHeight: '1.5'
             }}>{task.title}</p>
-            <p style={{ fontSize: '0.875rem', color: '#6b7280', marginTop: '0.25rem' }}>{task.deadline}</p>
+            <p style={{ 
+              fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)', 
+              color: '#6b7280', 
+              marginTop: '0.25rem' 
+            }}>{task.deadline}</p>
           </div>
         </div>
       ))}
@@ -170,38 +184,51 @@ function App() {
     <div style={{
       minHeight: '100vh',
       background: 'linear-gradient(to bottom right, #fce4ec, #f3e5f5)',
-      padding: '1rem'
+      padding: 'clamp(0.5rem, 3vw, 1rem)'
     }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto', width: '100%' }}>
-        <div style={{ marginBottom: '2rem' }}>
-          <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>結婚式準備管理</h1>
-          <p style={{ color: '#666' }}>2026年3月28日 挙式・披露宴</p>
+        <div style={{ marginBottom: 'clamp(1rem, 4vw, 2rem)' }}>
+          <h1 style={{ 
+            fontSize: 'clamp(1.5rem, 6vw, 2.5rem)', 
+            fontWeight: 'bold', 
+            marginBottom: '0.5rem',
+            lineHeight: '1.2'
+          }}>結婚式準備管理</h1>
+          <p style={{ color: '#666', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>2026年3月28日 挙式・披露宴</p>
         </div>
 
         <div style={{
           background: 'white',
           borderRadius: '8px',
-          padding: '1.5rem',
-          marginBottom: '1.5rem',
+          padding: 'clamp(1rem, 3vw, 1.5rem)',
+          marginBottom: 'clamp(1rem, 3vw, 1.5rem)',
           boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
         }}>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '1rem' }}>基本情報</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '1rem' }}>
+          <h2 style={{ 
+            fontSize: 'clamp(1rem, 4vw, 1.25rem)', 
+            fontWeight: 'bold', 
+            marginBottom: '1rem' 
+          }}>基本情報</h2>
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', 
+            gap: 'clamp(0.75rem, 2vw, 1rem)' 
+          }}>
             <div>
-              <p style={{ fontWeight: '600' }}>挙式日時</p>
-              <p>2026年3月28日（土）13:30〜</p>
+              <p style={{ fontWeight: '600', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>挙式日時</p>
+              <p style={{ fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)' }}>2026年3月28日（土）13:30〜</p>
             </div>
             <div>
-              <p style={{ fontWeight: '600' }}>披露宴</p>
-              <p>15:00〜17:00</p>
+              <p style={{ fontWeight: '600', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>披露宴</p>
+              <p style={{ fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)' }}>15:00〜17:00</p>
             </div>
             <div>
-              <p style={{ fontWeight: '600' }}>会場</p>
-              <p>3F チャペル / 4F 宴会場</p>
+              <p style={{ fontWeight: '600', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>会場</p>
+              <p style={{ fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)' }}>3F チャペル / 4F 宴会場</p>
             </div>
             <div>
-              <p style={{ fontWeight: '600' }}>次回打ち合わせ</p>
-              <p>2nd Meeting（日程未定）</p>
+              <p style={{ fontWeight: '600', fontSize: 'clamp(0.875rem, 3vw, 1rem)' }}>次回打ち合わせ</p>
+              <p style={{ fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)' }}>2nd Meeting（日程未定）</p>
             </div>
           </div>
         </div>
@@ -209,25 +236,40 @@ function App() {
         <div style={{
           background: 'white',
           borderRadius: '8px',
-          padding: '1.5rem',
+          padding: 'clamp(1rem, 3vw, 1.5rem)',
           boxShadow: '0 1px 3px rgba(0,0,0,0.1)'
         }}>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', marginBottom: '0.5rem' }}>ToDoリスト</h2>
-          <p style={{ color: '#666', marginBottom: '1rem' }}>
+          <h2 style={{ 
+            fontSize: 'clamp(1rem, 4vw, 1.25rem)', 
+            fontWeight: 'bold', 
+            marginBottom: '0.5rem' 
+          }}>ToDoリスト</h2>
+          <p style={{ 
+            color: '#666', 
+            marginBottom: '1rem',
+            fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)'
+          }}>
             完了: {tasks.filter(t => t.completed).length} / {tasks.length}
           </p>
 
-          <div style={{ borderBottom: '1px solid #e5e7eb', marginBottom: '1rem', overflowX: 'auto' }}>
-            <div style={{ display: 'flex', gap: '0.5rem', minWidth: 'max-content' }}>
+          <div style={{ 
+            borderBottom: '1px solid #e5e7eb', 
+            marginBottom: '1rem', 
+            overflowX: 'auto',
+            WebkitOverflowScrolling: 'touch'
+          }}>
+            <div style={{ display: 'flex', gap: '0.25rem', minWidth: 'max-content' }}>
               <button
                 onClick={() => setActiveTab("next")}
                 style={{
-                  padding: '0.75rem 1rem',
+                  padding: 'clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1rem)',
                   background: activeTab === "next" ? 'white' : 'transparent',
                   border: 'none',
                   borderBottom: activeTab === "next" ? '2px solid #2563eb' : '2px solid transparent',
                   cursor: 'pointer',
-                  fontWeight: activeTab === "next" ? '600' : '400'
+                  fontWeight: activeTab === "next" ? '600' : '400',
+                  fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)',
+                  whiteSpace: 'nowrap'
                 }}
               >
                 次回まで ({nextTasks.filter(t => !t.completed).length})
@@ -235,12 +277,14 @@ function App() {
               <button
                 onClick={() => setActiveTab("third")}
                 style={{
-                  padding: '0.75rem 1rem',
+                  padding: 'clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1rem)',
                   background: activeTab === "third" ? 'white' : 'transparent',
                   border: 'none',
                   borderBottom: activeTab === "third" ? '2px solid #2563eb' : '2px solid transparent',
                   cursor: 'pointer',
-                  fontWeight: activeTab === "third" ? '600' : '400'
+                  fontWeight: activeTab === "third" ? '600' : '400',
+                  fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)',
+                  whiteSpace: 'nowrap'
                 }}
               >
                 3rdまで ({thirdTasks.filter(t => !t.completed).length})
@@ -248,12 +292,14 @@ function App() {
               <button
                 onClick={() => setActiveTab("deadline")}
                 style={{
-                  padding: '0.75rem 1rem',
+                  padding: 'clamp(0.5rem, 2vw, 0.75rem) clamp(0.75rem, 3vw, 1rem)',
                   background: activeTab === "deadline" ? 'white' : 'transparent',
                   border: 'none',
                   borderBottom: activeTab === "deadline" ? '2px solid #2563eb' : '2px solid transparent',
                   cursor: 'pointer',
-                  fontWeight: activeTab === "deadline" ? '600' : '400'
+                  fontWeight: activeTab === "deadline" ? '600' : '400',
+                  fontSize: 'clamp(0.75rem, 2.5vw, 0.875rem)',
+                  whiteSpace: 'nowrap'
                 }}
               >
                 期限付き ({deadlineTasks.filter(t => !t.completed).length})
